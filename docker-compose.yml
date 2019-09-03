@@ -1,0 +1,22 @@
+version: '3.3'
+
+services:
+  #database:
+
+  pega-prpc-pe:
+    container_name: pega-prpc-pe
+    build:
+      dockerfile: Dockerfile
+      context: ./PegaPRPC-WebApp
+    environment:
+      - JDBC_URL=jdbc:postgresql://10.67.228.166/pega   #replace this with your postgresql installation ip
+      - DB_PORT=5432
+      - DB_USERNAME=**
+      - DB_PASSWORD=**
+      - JDBC_CLASS=org.postgresql.Driver      
+    ports:
+      - 8085:8080     #Use this line only if you have other webservers running on port 8080
+    
+    #depends_on:
+    #  - postgresql-pega-backend
+

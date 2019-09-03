@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context>
+
+  <WatchedResource>WEB-INF/web.xml</WatchedResource>
+
+  <Manager pathname="" />
+  
+  	<Resource name="jdbc/PegaRULES"
+		auth="Container"
+		type="javax.sql.DataSource"
+		factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+		driverClassName="{{ .Env.JDBC_CLASS }}"
+		url="{{ .Env.JDBC_URL }}"
+		username="{{ .Env.SECRET_DB_USERNAME }}"
+		password="{{ .Env.SECRET_DB_PASSWORD }}"
+		minActive="{{ .Env.JDBC_MIN_ACTIVE }}"
+		maxActive="{{ .Env.JDBC_MAX_ACTIVE }}"
+		minIdle="{{ .Env.JDBC_MIN_IDLE }}"
+		maxIdle="{{ .Env.JDBC_MAX_IDLE }}"
+		maxWait="{{ .Env.JDBC_MAX_WAIT }}"
+        initialSize="{{ .Env.JDBC_INITIAL_SIZE }}"
+        connectionProperties="{{ .Env.JDBC_CONNECTION_PROPERTIES }}"
+	/>
+</Context>   
+
