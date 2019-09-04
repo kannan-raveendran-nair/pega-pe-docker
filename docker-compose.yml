@@ -1,22 +1,39 @@
 version: '3.3'
 
 services:
-  #database:
 
+  #Start pega backend DB
+  postgresql-pega-backend:
+    container_name: postgresql-pega721
+    build:
+      dockerfile: Dockerfile
+      context: ./Postgresql-BackendDB
+    environment:
+      - POSTGRES_PASSWORD=pega
+      - POSTGRES_USER=pega
+      - POSTGRES_DB=pega
+      - POSTGRES_INITDB_ARGS=-T template0 -E 'UTF8'    
+    volumes:
+      - /home/kannan/DockerBuild/resources/:/tmp/resources/
+
+  #Start pega prweb 
   pega-prpc-pe:
-    container_name: pega-prpc-pe
+    container_name: pega721
     build:
       dockerfile: Dockerfile
       context: ./PegaPRPC-WebApp
     environment:
-      - JDBC_URL=jdbc:postgresql://10.67.228.166/pega   #replace this with your postgresql installation ip
+      - JDBC_URL=jdbc:postgresql://localhost/pega   #replace this with your postgresql installation ip
       - DB_PORT=5432
-      - DB_USERNAME=**
-      - DB_PASSWORD=**
+      - DB_USERNAME=pega
+      - DB_PASSWORD=pega
       - JDBC_CLASS=org.postgresql.Driver      
     ports:
       - 8085:8080     #Use this line only if you have other webservers running on port 8080
-    
-    #depends_on:
-    #  - postgresql-pega-backend
-
+    labels:
+      - "traefik.backend=pega721"
+      - "traefik.port=8085"
+      - traefik.enable=true
+      - "traefik.frontend.rule=Host:pega721.docker.localhost"    
+    depends_on:
+     - postgresql-pega-backend
