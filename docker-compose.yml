@@ -18,7 +18,7 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}  # substitute with db password
       - POSTGRES_USER=${POSTGRES_USER}  # substitute with db user
       - POSTGRES_DB=${POSTGRES_DB}  # substitute with db name
-      - POSTGRES_INITDB_ARGS=-T template0 -E 'UTF8'
+    # - POSTGRES_INITDB_ARGS=-T template0 -E 'UTF8'
 
     #command: ["scripts/check_ready.sh"]
     
