@@ -2,3 +2,4 @@
 *.jar
 *.dump
 */resources/*/*.sql
+*.env
