@@ -23,7 +23,7 @@ services:
     #command: ["scripts/check_ready.sh"]
     
     volumes:
-      - ${PEGA_DUMP}:/tmp/resources/  #substitue with directory holding pega.dump file
+      - ${PEGA_DUMP}:/tmp/resources/  #substitue ${PEGA_DUMP} with directory holding pega.dump file
 
   #Start pega prweb 
   pega-prpc-pe:
