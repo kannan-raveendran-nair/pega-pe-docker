@@ -5,7 +5,7 @@ services:
   #Start pega backend DB
   postgresql-pega-backend:
 
-    container_name: postgresql-pega721
+    container_name: postgresql-pega
     
     build:
       dockerfile: Dockerfile
@@ -28,7 +28,7 @@ services:
   #Start pega prweb 
   pega-prpc-pe:
     
-    container_name: pega721
+    container_name: pega
 
     build:
       dockerfile: Dockerfile
@@ -46,10 +46,10 @@ services:
       
     # ignore the below labels if you don't use traefik reverse proxy 
     labels:
-      - "traefik.backend=pega721"
+      - "traefik.backend=pega"
       - "traefik.port=8080"
       - traefik.enable=true
-      - "traefik.frontend.rule=Host:pega721.docker.localhost"    
+      - "traefik.frontend.rule=Host:pega.docker.localhost"    
 
     # this makes sure that pega backend is running before pega prpc is launched
     depends_on:

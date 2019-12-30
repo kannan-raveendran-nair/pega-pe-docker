@@ -3,18 +3,11 @@ FROM busybox AS builder
 # Copy contents of resources folder in github project to /tmp/resources
 COPY resources /tmp/resources
 
-# Unzip .war contents to own folders
-RUN mkdir -p /opt/pega/prweb /opt/pega/prhelp /opt/pega/prsysmgmt
-RUN unzip -q -o /tmp/resources/prweb.war -d /opt/pega/prweb
-RUN unzip -q -o /tmp/resources/prhelp.war -d /opt/pega/prhelp
-RUN unzip -q -o /tmp/resources/prsysmgmt.war -d /opt/pega/prsysmgmt
-
-
 # Using base tomcat image provided by pega for enterprise deployments
 FROM pegasystems/pega-ready
 
-# Import prweb to tomcat webapps directory
-COPY --from=builder /opt/pega ${CATALINA_HOME}/webapps
+# Import prweb, prhelp, prsysmgmt to tomcat webapps directory
+COPY --from=builder /tmp/resources/*.war ${CATALINA_HOME}/webapps/
 # Replace enterprise level context.xml file with personal-edition specific context.xml file
 COPY --from=builder /tmp/resources/context.xml.tmpl ${CATALINA_HOME}/conf
 

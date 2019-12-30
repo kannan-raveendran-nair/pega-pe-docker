@@ -13,7 +13,6 @@
 		url="{{ .Env.JDBC_URL }}"
 		username="{{ .Env.SECRET_DB_USERNAME }}"
 		password="{{ .Env.SECRET_DB_PASSWORD }}"
-		minActive="{{ .Env.JDBC_MIN_ACTIVE }}"
 		maxActive="{{ .Env.JDBC_MAX_ACTIVE }}"
 		minIdle="{{ .Env.JDBC_MIN_IDLE }}"
 		maxIdle="{{ .Env.JDBC_MAX_IDLE }}"
@@ -21,5 +20,10 @@
         initialSize="{{ .Env.JDBC_INITIAL_SIZE }}"
         connectionProperties="{{ .Env.JDBC_CONNECTION_PROPERTIES }}"
 	/>
+
+  <Environment name="prconfig/database/databases/PegaRULES/defaultSchema" value="rules" type="java.lang.String" />
+  <Environment name="prconfig/database/databases/PegaDATA/defaultSchema" value="data" type="java.lang.String" />
+  
 </Context>   
+
 
